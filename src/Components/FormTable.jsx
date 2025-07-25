@@ -4,6 +4,10 @@ import { Copy, Trash } from "lucide-react";
 const FormTable = ({urls, setUrls}) => {
 
   const [message, setMessage] = useState("");
+//   const [tableData, setTableData] = useState([urls]);
+  const clearTable = () => {
+    setUrls([]);
+  }
 
   //   const deleteUrl = (index) => {
   //     const updatedUrls = [...urls];
@@ -35,7 +39,17 @@ const FormTable = ({urls, setUrls}) => {
   return (
     <div className="bg-white w-full md:w-2/4 mx-auto p-6 md:p-8">
       <div className="p-4">
-        <h2 className="text-2xl font-bold mb-4">Shortened URLs</h2>
+        <div className="flex justify-between">
+          <h1 className="text-2xl font-bold mb-4">Shortened URL</h1>
+          <div className="">
+  <button className="bg-gray-800 hover:bg-red-500 cursor-pointer text-white text-xs p-2 md:text-sm py- md:py-2 md:px-4 rounded" onClick={()=> clearTable()}>
+    Clear
+  </button>
+</div>
+
+        </div>
+        {/* <h2 className="text-2xl font-bold mb-4">Shortened URLs</h2> */}
+        
         {message && (
           <p className="bg-green-200 p-2  text-sm mb-4 rounded">{message}</p>
         )}
@@ -45,7 +59,7 @@ const FormTable = ({urls, setUrls}) => {
               <tr className="bg-gray-100">
                 <th className="border p-2 text-left">Original URL</th>
                 <th className="border p-2 text-left">Short URL</th>
-                <th className="border p-2 text-left">Actions</th>
+                <th className="border p-2 text-left">Actions </th>
               </tr>
             </thead>
             <tbody>

@@ -42,23 +42,7 @@ const Form = ({onShortenUrl}) => {
         </div>
       </form>
 
-      {/* Results section (hidden by default) */}
-      <div className='mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200 hidden'>
-        <p className='text-sm text-gray-500 mb-2'>
-          Your shortened URL:
-        </p>
-        <div className='flex flex-row gap-2'>
-          <input 
-            type="text" 
-            value=""
-            readOnly
-            className='flex-1 px-4 py-3 border border-gray-300 rounded-lg bg-white text-orange-600 font-medium'
-          />
-          <button className='bg-gray-700 hover:bg-gray-800 text-white font-medium py-3 px-4 rounded-lg transition'>
-            Copy
-          </button>
-        </div>
-      </div>
+    
     </div>
   )
 }
