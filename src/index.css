@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+.table-cell-url {
+  max-width: 200px; /* Adjust as needed */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
