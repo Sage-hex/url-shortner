@@ -12,7 +12,8 @@ const Form = ({onShortenUrl,isLoading}) => {
       
       <form className='space-y-4' onSubmit={ (event) => {
         event.preventDefault();
-        onShortenUrl(longUrl, 'https://short.ly'+ Math.random().toString(36).substring(7));
+        // onShortenUrl(longUrl, 'https://short.ly'+ Math.random().toString(36).substring(7));
+        onShortenUrl(longUrl)
         setLongUrl('')
       }}>
         <div className='flex flex-row gap-2'>
