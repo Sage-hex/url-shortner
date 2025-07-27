@@ -71,7 +71,7 @@ const Home = () => {
                 const shortUrlFromAPi = data.short_url;
                 const parts = shortUrlFromAPi.split('/');
                 const shortId = parts[parts.length - 1];
-                const redirectShortUrl = `https://bokx81i066.execute-api.eu-west-1.amazonaws.com/api/redirect/${shortId};`
+                const redirectShortUrl = `https://bokx81i066.execute-api.eu-west-1.amazonaws.com/api/redirect/${shortId}`
                 const newUrl = {
                     id:uuidv4(),
                     original:original,
