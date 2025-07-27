@@ -459,7 +459,7 @@ const FormTable = ({ urls, setUrls }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 p-2 sm:p-4">
+    <div className="min-h-screen  p-2 sm:p-4">
       <div className="max-w-4xl mx-auto">
        {/* Header Section */}
 <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 p-4 sm:p-6 mb-6">
