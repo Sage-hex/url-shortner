@@ -69,10 +69,13 @@ const Home = () => {
 
             if (response.ok){
                 const shortUrlFromAPi = data.short_url;
+                const parts = shortUrlFromAPi.split('/');
+                const shortId = parts[parts.length - 1];
+                const redirectShortUrl = `https://bokx81i066.execute-api.eu-west-1.amazonaws.com/api/redirect/${shortId};`
                 const newUrl = {
                     id:uuidv4(),
                     original:original,
-                    short:shortUrlFromAPi,
+                    short:redirectShortUrl,
                 };
                 setUrls(prevUrls => [...prevUrls, newUrl])
             } else{
