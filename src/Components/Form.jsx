@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 
-const Form = ({onShortenUrl}) => {
+const Form = ({onShortenUrl,isLoading}) => {
     const [longUrl, setLongUrl] = useState('');
-    // const [shortUrl, setShortUrl] = useState('');
-    // const [isLoading, setIsLoading] = useState(false);
-    // const [error, setError] = useState('');
-    // const [message, setMessage] = useState('');
 
     // const handleAd
   return (
@@ -17,7 +13,7 @@ const Form = ({onShortenUrl}) => {
       <form className='space-y-4' onSubmit={ (event) => {
         event.preventDefault();
         onShortenUrl(longUrl, 'https://short.ly'+ Math.random().toString(36).substring(7));
-        setLongUrl(' ')
+        setLongUrl('')
       }}>
         <div className='flex flex-row gap-2'>
           <div className='flex-1'>
@@ -29,16 +25,24 @@ const Form = ({onShortenUrl}) => {
               required
               value={longUrl}
               onChange={(e) => setLongUrl(e.target.value)}
-            //   disabled={isLoading}
+              disabled={isLoading}
 
             />
           </div>
-          <button 
+
+          {
+            isLoading ? (<button className='bg-gray-900 hover:bg-gray-800 text-white font-medium py-3 px-6 cursor-wait transition duration-200 shadow-sm whitespace-nowrap'
+         >Shortening...</button>)
+            :(
+                  <button 
             type="submit" 
             className='bg-orange-500 hover:bg-gray-800 text-white font-medium py-3 px-6 cursor-pointer transition duration-200 shadow-sm whitespace-nowrap'
           >
             Shorten
           </button>
+            )
+          }
+        
         </div>
       </form>
 

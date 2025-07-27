@@ -4,7 +4,6 @@ import { Copy, Trash } from "lucide-react";
 const FormTable = ({urls, setUrls}) => {
 
   const [message, setMessage] = useState("");
-//   const [tableData, setTableData] = useState([urls]);
   const clearTable = () => {
     setUrls([]);
   }
@@ -63,7 +62,10 @@ const FormTable = ({urls, setUrls}) => {
               </tr>
             </thead>
             <tbody>
-              {urls.map((url, index) => (
+              { 
+              urls.length === 0 ? (<p className="text-center text-gray-500">No URLs found....</p>
+              ):
+              (urls.map((url, index) => (
                 <tr key={url.id} className="hover:bg-gray-50">
                   <td className="border p-2 table-cell-url">{url.original}</td>
                   <td className="border p-2">{url.short}</td>
@@ -78,12 +80,16 @@ const FormTable = ({urls, setUrls}) => {
                     />
                   </td>
                 </tr>
-              ))}
+              )))}
             </tbody>
           </table>
           {/* Mobile View */}
           <div className="md:hidden space-y-4">
-            {urls.map((url, index) => (
+            {
+            urls.length === 0 ? (<p className="text-center text-gray-500">No URLs found....</p>
+            ):
+            
+            (urls.map((url, index) => (
               <div key={url.id} className="border p-4 rounded-lg shadow-sm">
                 <div className="font-semibold">Original URL</div>
                 <div className="text-sm break-all">{url.original}</div>
@@ -100,7 +106,7 @@ const FormTable = ({urls, setUrls}) => {
                   />
                 </div>
               </div>
-            ))}
+            )))}
           </div>
         </div>
       </div>
