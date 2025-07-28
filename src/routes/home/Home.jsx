@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Form from '../../Components/Form'
 import FormTable from '../../Components/FormTable'
 import { v4 as uuidv4 } from 'uuid'
@@ -6,28 +6,25 @@ import { Type } from 'lucide-react'
 
 const Home = () => {
     const [isLoading, setIsLoading] = useState(false);
-     const [urls, setUrls] = useState([
-        {
-          id: "1",
-          original: "https://www.example.com/",
-          short: "https://abcd.in/XyZ123",
-        },
-        {
-          id: "2",
-          original: "https://www.example.com/",
-          short: "https://abcd.in/XyZ123",
-        },
-        {
-          id: "3",
-          original: "https://www.example.com/",
-          short: "https://abcd.in/XyZ123",
-        },
-        {
-          id: "4",
-          original: "https://www.example.com/",
-          short: "https://abcd.in/XyZ123",
-        },
-      ]);
+     const [urls, setUrls] = useState(()=>{
+        const storedUrls = localStorage.getItem('shortenedUrls');
+        if(storedUrls){
+            try{
+                const parseUrl = JSON.parse(storedUrls);
+                console.log("Initialized URLs from localStorage:", parseUrl);
+                return parseUrl
+            }catch (error){
+                console.error("Error parsing stored URLs from localStorage on initialization:", error);
+                return [];
+            }
+        }
+        console.log("No URLs found in localStorage, initializing with empty array.");
+        return [];
+});
+     
+     useEffect(()=>{
+        localStorage.setItem('shortenedUrls', JSON.stringify(urls))
+     },[urls])
 
     //   Old function simulation
 
@@ -76,8 +73,9 @@ const Home = () => {
                     id:uuidv4(),
                     original:original,
                     short:redirectShortUrl,
+                    createdAt: new Date().toISOString(),
                 };
-                setUrls(prevUrls => [...prevUrls, newUrl])
+                setUrls(prevUrls => [newUrl,...prevUrls])
             } else{
                 console.log("API Err Response:", data.Message || "Unknown API Error")
             }

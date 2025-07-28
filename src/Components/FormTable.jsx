@@ -447,11 +447,24 @@ const FormTable = ({ urls, setUrls }) => {
   };
 
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
-    });
+    // Ensure dateString is valid before trying to format
+    if(!dateString) return "N/A";
+
+    try {
+      const date = new Date(dateString);
+      return date.toLocaleTimeString('en-US', {
+        // month: 'short',
+        // day: 'numeric',
+        // year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      });
+    } catch (error) {
+        console.error("Error formatting date:", error)
+      return "Invalid Date";
+    }
   };
 
   const truncateUrl = (url, maxLength = 40) => {
@@ -459,7 +472,7 @@ const FormTable = ({ urls, setUrls }) => {
   };
 
   return (
-    <div className="min-h-screen  p-2 sm:p-4">
+    <div className="min-h-screen mt-4 p-2 sm:p-4">
       <div className="max-w-4xl mx-auto">
        {/* Header Section */}
 <div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 p-4 sm:p-6 mb-6">
@@ -543,7 +556,7 @@ const FormTable = ({ urls, setUrls }) => {
                           <div className="flex items-center gap-2 text-gray-600">
                             <Calendar className="w-4 h-4" />
                             <span className="text-sm">
-                              {url.createdAt ? formatDate(url.createdAt) : 'Today'}
+                              {formatDate(url.createdAt)}
                             </span>
                           </div>
                         </td>
@@ -635,7 +648,7 @@ const FormTable = ({ urls, setUrls }) => {
                         <div className="flex items-center gap-2 text-gray-600">
                           <Calendar className="w-4 h-4" />
                           <span className="text-sm">
-                            {url.createdAt ? formatDate(url.createdAt) : 'Today'}
+                            {formatDate(url.createdAt)}
                           </span>
                         </div>
                       </div>
