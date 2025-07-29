@@ -5,7 +5,7 @@ const Form = ({onShortenUrl,isLoading}) => {
 
     // const handleAd
   return (
-    <div className='bg-white w-full md:w-2/4 mx-auto p-6 md:p-8 '>
+    <div className='bg-white w-full md:w-2/4 mx-auto p-6 md:p-8 mt-10 md:mt-0'>
       <h1 className='text-2xl md:text-3xl font-bold text-center text-gray-800 mb-6'>
         Shorten Your URL
       </h1>

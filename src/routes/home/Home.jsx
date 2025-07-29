@@ -111,11 +111,11 @@ const Home = () => {
                 console.log(`URL with ID ${idToDelete} and short_id ${shortId} deleted successfully from API and state.`);
 
             }else{
-                const errorData = await response.JSON();
+                const errorData = await response.json();
                 console.log("Error deleting URL from API:", errorData.Message || "Unknown API Error")
 
             }
-         } catch{
+         } catch(error){
              console.error("Network or fetch error during deletion:", error);
          }
 
@@ -124,7 +124,7 @@ const Home = () => {
   return (
     <div className=''>
       <Form onShortenUrl={addUrl} isLoading={isLoading}/>
-      <FormTable urls={urls} setUrls={setUrls}/>
+      <FormTable urls={urls} setUrls={setUrls} onDeleteUrl={deleteUrl}/>
     </div>
   )
 }

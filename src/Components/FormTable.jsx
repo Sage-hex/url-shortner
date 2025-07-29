@@ -467,9 +467,7 @@ const FormTable = ({ urls, setUrls,onDeleteUrl }) => {
     try {
       const date = new Date(dateString);
       return date.toLocaleTimeString('en-US', {
-        // month: 'short',
-        // day: 'numeric',
-        // year: 'numeric',
+      
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
@@ -489,7 +487,7 @@ const FormTable = ({ urls, setUrls,onDeleteUrl }) => {
     <div className="min-h-screen mt-4 p-2 sm:p-4">
       <div className="max-w-4xl mx-auto">
        {/* Header Section */}
-<div className="bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl border border-white/20 p-4 sm:p-6 mb-6">
+<div className="bg-white/10 backdrop-blur-lg rounded-full  border border-black/20 p-4 sm:p-6 mb-6">
   <div className="flex flex-row justify-between items-center gap-3 w-full">
     <h1 className="text-sm sm:text-lg md:text-2xl font-bold text-gray-800 truncate">
       Shortened URLs
