@@ -408,7 +408,7 @@
 import React, { useState } from "react";
 import { Copy, Trash, ExternalLink, Calendar, BarChart3 } from "lucide-react";
 
-const FormTable = ({ urls, setUrls }) => {
+const FormTable = ({ urls, setUrls,onDeleteUrl }) => {
   const [message, setMessage] = useState("");
   const [deletingIndex, setDeletingIndex] = useState(null);
 
@@ -418,15 +418,29 @@ const FormTable = ({ urls, setUrls }) => {
     setTimeout(() => setMessage(""), 2000);
   };
 
-  const handleDeleteUrl = (index) => {
+  const handleDeleteUrl = async(index) => {
+    const urlToDelete = urls[index];
+    if(!urlToDelete) return
     setDeletingIndex(index);
-    setTimeout(() => {
-      const updatedUrls = urls.filter((url, idx) => idx !== index);
-      setUrls(updatedUrls);
-      setDeletingIndex(null);
-      setMessage("URL deleted successfully!");
-      setTimeout(() => setMessage(""), 2000);
-    }, 300);
+
+    try{
+      await onDeleteUrl(urlToDelete.id);
+      setMessage("URL deleted successfully!")
+
+    }catch(error){
+      console.error("Failed to delete URL:", error);
+      setMessage("Failed to delete URL.");
+    }finally {
+        setDeletingIndex(null); // Resets the visual indicator.
+        setTimeout(() => setMessage(""), 2000);
+    }
+    // setTimeout(() => {
+    //   const updatedUrls = urls.filter((url, idx) => idx !== index);
+    //   setUrls(updatedUrls);
+    //   setDeletingIndex(null);
+    //   setMessage("URL deleted successfully!");
+    //   setTimeout(() => setMessage(""), 2000);
+    // }, 300);
   };
 
   const copyToClipboard = (text) => {

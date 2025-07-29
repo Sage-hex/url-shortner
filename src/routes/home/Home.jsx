@@ -86,6 +86,41 @@ const Home = () => {
             setIsLoading(false);
         }
     }
+
+    const deleteUrl = async(idToDelete) => {
+
+        const urlItem = urls.find(url => url.id === idToDelete);
+        if(!urlItem){
+            alert("Url for deletion not found", idToDelete);
+           
+        }
+         const parts = urlItem.short.split('/');
+         const shortId = parts[parts.length - 1];
+
+         if(!shortId){
+            console.log("Could not extract short ID for deletion:", urlItem.short)
+         }
+
+         try{
+            const apiUrl = `https://bokx81i066.execute-api.eu-west-1.amazonaws.com/api/${shortId}`;
+            const response = await fetch(apiUrl,{
+                method: 'DELETE',
+            })
+            if(response.ok){
+                setUrls(prevUrls => prevUrls.filter(url => url.id !== idToDelete));
+                console.log(`URL with ID ${idToDelete} and short_id ${shortId} deleted successfully from API and state.`);
+
+            }else{
+                const errorData = await response.JSON();
+                console.log("Error deleting URL from API:", errorData.Message || "Unknown API Error")
+
+            }
+         } catch{
+             console.error("Network or fetch error during deletion:", error);
+         }
+
+
+    }
   return (
     <div className=''>
       <Form onShortenUrl={addUrl} isLoading={isLoading}/>
